@@ -5,26 +5,14 @@ std::set<std::vector<int>> findAllUnqiueTriangles(const std::vector<std::vector<
 {
     std::set<std::vector<int>> triangles;
     for(int i=0;i<adj.size();i++)
-    {
-        for(int j=0;j<adj.size();j++)
-        {
-            if(i==j)
-                continue;
-            else if(adj[i][j])
-            {
-                for(int k=0;k<adj.size();k++)
-                {
-                    if(i==k||j==k)
-                        continue;
-                    else if(adj[j][k]&&adj[i][k])
+        for(int j=i+1;j<adj.size();j++)
+            if(adj[i][j])
+                for(int k=k+1;k<adj.size();k++)
+                    if(adj[j][k]&&adj[i][k])
                     {
                         std::vector<int> tmp{i,j,k};
                         std::sort(tmp.begin(),tmp.end());
                         triangles.emplace(tmp);
                     }
-                }
-            }
-        }
-    }
     return triangles;
 }
